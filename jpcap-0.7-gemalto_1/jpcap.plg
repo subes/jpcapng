@@ -1,0 +1,63 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: jpcap - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "d:\DOCUME~1\ebachimo\LOCALS~1\Temp\RSP1C3.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /I "C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Include" /I ".\src\c" /I ".\src\c\win32\jdk\include" /I ".\src\c\win32\jdk\include\win32" /I ".\src\c\win32\WpdPack\Include" /I ".\src\c\include" /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /Fp"Debug/jpcap.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\PROGRAM FILES\JPCAP\src\c\Jpcap.c"
+"D:\PROGRAM FILES\JPCAP\src\c\Jpcap_ipaddr.c"
+"D:\PROGRAM FILES\JPCAP\src\c\JpcapSender.c"
+"D:\PROGRAM FILES\JPCAP\src\c\JpcapWriter.c"
+"D:\PROGRAM FILES\JPCAP\src\c\packet_arp.c"
+"D:\PROGRAM FILES\JPCAP\src\c\packet_datalink.c"
+"D:\PROGRAM FILES\JPCAP\src\c\packet_icmp.c"
+"D:\PROGRAM FILES\JPCAP\src\c\packet_ip.c"
+"D:\PROGRAM FILES\JPCAP\src\c\packet_ipv6.c"
+"D:\PROGRAM FILES\JPCAP\src\c\packet_tcp.c"
+"D:\PROGRAM FILES\JPCAP\src\c\packet_udp.c"
+]
+Creating command line "cl.exe @d:\DOCUME~1\ebachimo\LOCALS~1\Temp\RSP1C3.tmp" 
+Creating temporary file "d:\DOCUME~1\ebachimo\LOCALS~1\Temp\RSP1C4.tmp" with contents
+[
+/nologo /out:"Debug\jpcap.lib" 
+".\Debug\Jpcap.obj"
+".\Debug\Jpcap_ipaddr.obj"
+".\Debug\JpcapSender.obj"
+".\Debug\JpcapWriter.obj"
+".\Debug\packet_arp.obj"
+".\Debug\packet_datalink.obj"
+".\Debug\packet_icmp.obj"
+".\Debug\packet_ip.obj"
+".\Debug\packet_ipv6.obj"
+".\Debug\packet_tcp.obj"
+".\Debug\packet_udp.obj"
+]
+Creating command line "link.exe -lib @d:\DOCUME~1\ebachimo\LOCALS~1\Temp\RSP1C4.tmp"
+<h3>Output Window</h3>
+Compiling...
+Jpcap.c
+Jpcap_ipaddr.c
+JpcapSender.c
+JpcapWriter.c
+packet_arp.c
+packet_datalink.c
+packet_icmp.c
+packet_ip.c
+packet_ipv6.c
+packet_tcp.c
+packet_udp.c
+D:\PROGRAM FILES\JPCAP\src\c\packet_tcp.c(103) : warning C4761: integral size mismatch in argument; conversion supplied
+Creating library...
+
+
+
+<h3>Results</h3>
+jpcap.lib - 0 error(s), 1 warning(s)
+</pre>
+</body>
+</html>
