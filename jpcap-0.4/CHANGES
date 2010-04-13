@@ -1,0 +1,31 @@
+Changes
+
+04/09/03 Fixed the bugs of Jpcap.openFile() and JpcapWriter
+
+04/01/03 Add JpcapSender for sending packets.
+         Add/Revise some APIs of Jpcap.
+         Add support of Raw Socket for sending packets on Windows 2000/XP.
+         Support multiple Jpcap and JpcapSender instances in a single application
+         Many bug fixes
+
+09/14/00 Add JpcapWriter for saving packets to a file.
+         ARP/ Reverse ARP packet supported (jpcap.ARPPacket added).
+         Fix bug to call Jpcap#close() when garbage-collected.
+         Fix bug that Jpcap.c couldn't compile on Linux
+         Divide Jpcap.c into several files.
+
+08/22/00 Fixed bug to cause crush when capturing ICMP with error IP packet.
+
+08/03/00 Fixed bug which disabled to compile under Solaris (and probably
+         Linux).
+
+07/29/00 Jpcap 0.02 is relased.
+         Fixed various bugs. Now it counts the size of a packet correctly.
+         Also the data field following the header is exactly copied.
+         Microsoft Windows (both 9x and NT/2000) is supported.
+
+07/04/00 Jpcap.loopPacket() method were added.
+         Fixed to get IP fragment offset in host order.
+
+06/25/00 Jpcap 0.01 is released.
+

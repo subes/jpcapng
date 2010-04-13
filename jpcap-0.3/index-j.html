@@ -1,0 +1,134 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="ja">
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Jpcap - Java package for libpcap and raw socket</title>
+</head>
+
+<body>
+
+<p align="left"><a href="index.html">[English]</a></p>
+
+<p align="center"><font size="6" color="#0000FF">Jpcap (Java package for libpcap)</font></p>  
+<p align="right">(c) 2000 <a href="mailto:fujii@goto.info.waseda.ac.jp">Keita   
+Fujii</a></p>  
+<p>　</p>
+<blockquote>
+<p>Jpcap      
+はJavaからLAN上を流れるパケットの受信と任意のIPパケットの送信を可能とするJavaクラスパッケージです。<br>
+このパッケージはlibpcapとRaw      
+Socket APIを使用します。 </p>      
+  <p>現在、FreeBSD 3.x, Linux RedHat6.1, Solaris, Windows 2000上での動作を確認しています。 </p>     
+  <p>対応プロトコルは、イーサネット, IPv4, IPv6, ARP/RARP, TCP, 
+  UDP, ICMPv4です。 </p>     
+  <hr width="80%">
+<p><b>What's New</b></p>    
+  <ul> 
+    <li>9/14/00&nbsp; Jpcap ver.0.03をリリース。ARP/RARP 
+      パケットをサポート。その他バグフィックス</li>
+    <li>7/29/00&nbsp; Jpcap ver 0.02をリリース。MS Windows with WinPcapをサポート。</li> 
+  </ul> 
+  <hr width="80%">
+<p><b>ダウンロード</b></p>  
+  <p>&nbsp;&nbsp; For Windows: <a href="jpcap.zip">jpcap.zip</a></p>  
+<p>&nbsp;&nbsp;&nbsp; For UNIX:&nbsp; <a href="jpcap.tar.gz">jpcap.t.ar.gz</a></p> 
+  <hr width="80%">
+<p><b>インストール方法</b></p>   
+  <blockquote>
+<p>＜Windows9x／NT／2000＞</p>   
+    <ol>
+      <li><a href="http://java.sun.com">JDK 1.2</a>以上をインストールします。</li>
+      <li>libpcapのWindows移植版である<a href="http://netgroup-serv.polito.it/winpcap/">WinPcapのホームページ</a>からNDIS 
+        packet capture driverをダウンロードして<br>
+        インストールします。</li>
+      <li><a href="jpcap.zip">jpcap.zip</a>をダウンロードして、適当なフォルダに展開します。</li>
+      <li>Jpcap.dllをシステムフォルダ（\Windows\か\Winnt\system32）、またはパスの通っているフォルダに<br>
+        コピーします。</li>
+      <li>jpcap.jarを\jdk1.?\jre\lib\extにコピーします。</li>
+    </ol>
+    <p>＜UNIX＞</p>
+    <ol>
+      <li>各プラットホームで利用可能な<a href="http://java.sun.com">最新のJDK</a>をインストールします。</li>
+      <li>libpcapをインストールしていない場合は<a href="http://www.tcpdump.org">こちらからダウンロード</a>してインストールします。</li>
+      <li><a href="jpcap.tar.gz">jpcap.tar.gz</a>をダウンロードして展開します。</li>
+      <li>jpcapディレクトリに移動し、Makefileを編集します。</li>
+      <li>makeを実行します。<br>
+        <font color="#FF0000">もし &quot;structure has no member named `sa_len'&quot; 
+        というエラーがでてコンパイル出来ない時は、<br>
+        Jpcap_sub.hの &quot;#define HAVE_SA_LEN&quot;の1行をコメントアウトしてください。</font></li>
+      <li>出来上がったlibjpcap.soを<br>
+        <u>JDK1.2の場合<br>
+        </u>&nbsp;&nbsp; Javaのインストール先/jre/lib/extにコピーします。<br>
+        <br>
+        <u>JDK1.1の場合<br>
+        </u>&nbsp;&nbsp; Javaのインストール先/lib/プロセッサ名(i386)/スレッドライブラリ名(green_thread)にコピーするか、<br>
+        &nbsp;&nbsp; 環境変数LD_LIBRARY_PATHで設定したパスに置いてください。</li>
+    </ol>
+    <p># Linux, FreeBSD, Solarisでコンパイルしたlibjpcap.soを同梱しておきます。それらを適切なディレクトリに<br>
+    # 
+    コピーするだけで動作するかもしれませんが、保証はしません。</p>
+  </blockquote>
+  <hr width="80%">
+<p><b>ドキュメント</b></p>   
+  <blockquote>
+    <a href="README">Readme（英語）<br>
+    </a>&nbsp;&nbsp;&nbsp;&nbsp; 
+    インストール方法などが書いてあります。
+    <p><a href="CHANGES">更新</a><a href="CHANGES">履歴<br>
+    </a>&nbsp;&nbsp;&nbsp;&nbsp; これまでの更新履歴です。
+    <p><a href="doc_ja/index.html" target="_blank">APIマニュアル<br>
+    </a>&nbsp;&nbsp;&nbsp;&nbsp; javadocで生成したjpcapパッケージ内の全クラスのAPIマニュアルです。
+    <p><a href="Tcpdump.java">サンプルプログラム<br>
+    </a>&nbsp;&nbsp;&nbsp;&nbsp; tcpdumpライクなプログラムです。
+  </blockquote>
+  <hr width="80%">
+  <p><b>JpcapDumper</b></p>    
+  <p><a href="../JpcapDumper/index-j.html"><img border="0" src="../JpcapDumper/shot1.gif" width="130" height="130" align="absmiddle"></a> 
+  Jpcapを用いたグラフィカルなパケットキャプチャソフトです。<a href="../JpcapDumper/index-j.html"><br>
+  </a><a href="http://www.goto.info.waseda.ac.jp/~fujii/JpcapDumper/index-j.html">こちら</a>からダウンロードできます。</p>    
+</blockquote>
+<hr width="80%">
+<blockquote>
+<p><b>リンク</b></p> 
+<p><a href="http://ee.lbl.gov/">LBNL's Network Research Group (libpcap, tcpdump)<br> 
+</a>&nbsp; libpcap, tcpdumpの開発元です。</p> 
+  <p><a href="http://www.tcpdump.org">tcpdump.org</a><br>
+  &nbsp; 最新のlibpcapとtcpdumpを配布しているページです。</p> 
+  <p><a href="http://netgroup-serv.polito.it/winpcap/">WinPcap<br>
+  </a>&nbsp; libpcapのWindows移植版です。</p> 
+<p><a href="http://www.goto.info.waseda.ac.jp/~fukusima/ruby/pcap-e.html">Ruby/pcap<br>
+</a>&nbsp; Ruby言語でpcapを扱うためのライブラリです。</p> 
+ 
+</blockquote>
+ 
+<!-- Start of TheCounter.com Code --> 
+<SCRIPT TYPE="text/javascript" LANGUAGE="javascript"> 
+s="na";c="na";j="na";f=""+escape(document.referrer) 
+</SCRIPT> 
+<SCRIPT TYPE="text/javascript" LANGUAGE="javascript1.2"> 
+s=screen.width;v=navigator.appName 
+if (v != "Netscape") {c=screen.colorDepth} 
+else {c=screen.pixelDepth} 
+j=navigator.javaEnabled() 
+</SCRIPT> 
+<SCRIPT TYPE="text/javascript" LANGUAGE="javascript"> 
+function pr(n) {document.write(n,"\n");} 
+NS2Ch=0 
+if (navigator.appName == "Netscape" && 
+navigator.appVersion.charAt(0) == "2") {NS2Ch=1} 
+if (NS2Ch == 0) { 
+r="&size="+s+"&colors="+c+"&referer="+f+"&java="+j+"" 
+pr("<A HREF=\"http://www.TheCounter.com\" TARGET=\"_top\"><IMG"+ 
+" BORDER=0 SRC=\"http://c2.thecounter.com/id=1204400"+r+"\"><\/A>")} 
+</SCRIPT> 
+<NOSCRIPT><A HREF="http://www.TheCounter.com" TARGET="_top"><IMG 
+SRC="http://c2.thecounter.com/id=1204400" ALT="TC" BORDER=0 align="right" width="88" height="31"></A> 
+</NOSCRIPT>     
+<!-- End of TheCounter.com Code -->     
+     
+</body>     
+     
+</html>     

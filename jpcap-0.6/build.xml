@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<project name="Jpcap" default="jar">
+	<property name="version" value="0.6"/>
+	<target name="compile">
+        <javac
+        	srcdir="src/java"
+      		destdir="bin"
+       />
+    </target>
+	
+    <target name="jar" depends="compile">
+        <jar
+             jarfile="lib/jpcap.jar"
+             basedir="bin"
+             excludes="*.class"
+        />
+    </target>
+
+	<target name="javadoc">
+		<javadoc
+			packagenames="*"
+			sourcepath="src/java"
+			destdir="doc/javadoc"
+			locale="en_US"
+		/>
+	</target>
+	
+	<target name="win32 installer" depends="jar">
+		<exec dir="src/installer/win32" executable="C:\Program Files\NSIS\makensis.exe">
+			<arg line="JpcapSetup.nsi"/>
+		</exec>
+		<copy file="src/installer/win32/JpcapSetup.exe" tofile="JpcapSetup-${version}.exe"/>
+	</target>
+	
+	<target name="source zip" depends="win32 installer">
+    	<copy todir="lib">
+ 			<fileset file="src/c/win32/Release/Jpcap.dll"/>
+    	</copy>
+		<zip
+			destfile="jpcap-${version}.zip"
+			basedir="."
+			excludes="**/.* **/*.zip bin/** src/c/win32/Debug/** src/c/win32/Release/** src/c/win32/**.ncb src/c/win32/**.s** src/c/win32/*.vcproj.* "
+		/>
+	</target>
+</project>
+

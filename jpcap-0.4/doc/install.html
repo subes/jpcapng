@@ -1,0 +1,105 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Jpcap - Java package for packet capture</title>
+</head>
+
+<body link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" topmargin="10" leftmargin="10">
+
+<table border="0" width="100%" bgcolor="#339933" height="50" cellpadding="5">
+  <tr>
+    <td><i><b><font color="#FFFFFF" size="7">&nbsp; Jpcap</font></b></i></td>
+    <td valign="bottom" align="right"><font color="#FFFFFF"><b><i>Java package
+      for packet capture</i></b></font></td>
+  </tr>
+</table>
+<table border="0" width="100%" cellpadding="10">
+  <tr>
+    <td width="100" bgcolor="#00FF99" align="center" valign="top">&#12288;
+      <table border="1" width="138" bgcolor="#33CC33" cellspacing="0" cellpadding="5" bordercolor="#00FF99" bordercolordark="#00FF99" bordercolorlight="#008000">
+        <tr>
+          <td width="120" align="center"><b><font color="#FFFFFF"><a href="index.html">Home</a></font></b></td>
+        </tr>
+        <tr>
+          <td width="120" align="center"><b><font color="#FFFFFF"><a href="download.html">Download</a></font></b></td>
+        </tr>
+        <tr>
+          <td width="120" align="center"><b><font color="#FFFFFF"><a href="install.html">Install</a></font></b></td>
+        </tr>
+        <tr>
+          <td width="120" align="center"><b><font color="#FFFFFF"><a href="document.html">Document</a></font></b></td>
+        </tr>
+        <tr>
+          <td width="120" align="center"><b><font color="#FFFFFF"><a href="faq.html">FAQ</a></font></b></td>
+        </tr>
+        <tr>
+          <td width="120" align="center"><b><font color="#FFFFFF"><a href="tools.html">Tools</a></font></b></td>
+        </tr>
+        <tr>
+          <td width="120" align="center"><b><font color="#FFFFFF"><a href="donation.html">Donation</a></font></b></td>
+        </tr>
+        <tr>
+          <td width="120" align="center"><b><font color="#FFFFFF"><a href="links.html">Links</a></font></b></td>
+        </tr>
+      </table>
+      <p>&#12288;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</td>
+    <td valign="top">
+      <table border="1" width="100%" bordercolor="#FFFFFF" height="19" bordercolorlight="#000000" bordercolordark="#000000" cellspacing="0" cellpadding="5" bgcolor="#33CC33">
+        <tr>
+          <td width="100%" height="13"><font size="4">Installation</font></td>
+        </tr>
+      </table>
+      <p>&lt;Windows 9x, NT, 2000&gt;</p>
+      <ol>
+        <li>Download and install <a href="http://java.sun.com"><font color="#008000">Java<sup>tm</sup>2
+          Platform, Standard Edition (J2SE<sup>tm</sup>) JRE or SDK.</font></a>
+        <li>Download and install the latest <a href="http://winpcap.polito.it/"><font color="#008000">WinPcap</font></a>.
+        <li>Download and extract the latest <a href="download.html"><font color="#008000">Jpcap</font></a>.</li>
+        <li>Copy &quot;lib\Jpcap.dll&quot; into &quot;[JRE directory]\bin&quot;
+          or &quot;[JRE directory]\lib\ext\x86&quot;</li>
+        <li>Copy &quot;lib\jpcap.jar&quot; into &quot;[JRE
+          directory]\lib\ext&quot;</li>
+        <li>If you installed J2SE SDK, you also need to copy &quot;lib\jpcap.jar&quot;
+          into &quot;[SDK directory]\jre\lib\ext&quot;.</li>
+      </ol>
+      <p>&nbsp; Note: [JRE directory] is usually &quot;C:\Program
+      Files\Java\j2re*&quot;.<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [SDK
+      directory] is usually &quot;C:\j2sdk*&quot;.</p>
+      <p>&nbsp; &lt;UNIX&gt;</p>
+      <ol>
+        <li>Download and install <a href="http://java.sun.com"><font color="#008000">Java<sup>tm</sup>2
+          Platform, Standard Edition (J2SE<sup>tm</sup>) JRE or SDK</font></a><font color="#008000"></font>
+        <li>Download and install <a href="http://www.tcpdump.org"><font color="#008000">libpcap</font></a>
+          if not installed.</li>
+        <li>Download and extract the latest <a href="download.html"><font color="#008000">Jpcap</font></a>
+        <li>Go to &quot;src/c&quot; directory, and edit Makefile
+        <li>Run &quot;make&quot;.<br>
+          <font color="#ff0000">If you get an error &quot;structure has no
+          member named `sa_len'&quot;,<br>
+          comment out the line &quot;#define HAVE_SA_LEN&quot; in Jpcap_sub.h.</font>
+        <li>Copy libjpcap.so to [Java directory]/jre/lib/&lt;arch&gt;.
+          &lt;arch&gt; is either &quot;i386&quot; or &quot;sparc&quot;</li>
+        <li>Copy &quot;lib/jpcap.jar&quot; into [Java directory]/jre/lib/ext.<br>
+        </li>
+      </ol>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#00FF99" colspan="2" align="right">&nbsp;(c) Keita Fujii, <a href="mailto:kfujii@uci.edu"><font color="#000000">kfujii@uci.edu</font><br>
+      </a>Last Modified: <!--webbot bot="Timestamp" startspan s-type="EDITED"
+      s-format="%Y/%m/%d" -->2003/04/08<!--webbot bot="Timestamp"
+      i-checksum="12538" endspan --></td>
+  </tr>
+</table>
+
+</body>
+
+</html>

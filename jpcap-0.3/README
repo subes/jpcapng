@@ -1,0 +1,79 @@
+Jpcap ver.0.03
+
+Copyright (c) 2000 Keita Fujii <fujii@goto.info.waseda.ac.jp>
+
+*Introduction
+
+Jpcap is a Java package for LBL libpcap (Packet Capture Library) and
+Raw Socket API. 
+
+
+*Installation
+
+Requirements:
+
+  - JDK1.1 or higher (http://java.sun.com)
+  - libpcap (http://ee.lbl.gov/ or http://www.tcpdump.org)
+    OR
+  - WinPcap for Windows (http://netgroup-serv.polito.it/winpcap/)
+
+Compile:
+
+I'm sorry but I have to say that I'm not an expert UNIX C programmer,
+so I can only make a poor Makefile...
+
+First, download jpcap.tar.gz or jpcap.zip and decompress it.
+
+Then, edit Makefile. There are several options you have to change
+according to what OS you're installing to.
+
+Also you might have to modify Jpcap_sub.h to enable IPv6 feature.
+However, you need header files for v6 installed in your machine.
+
+Run make.
+(If you get an error "structure has no member name sa_len...",
+please comment out the line "#define HAVE_SA_LEN" in Jpcap_sub.h.
+I'm so sorry for inconvenience.)
+
+
+Copy libjpcap.so to JDK lib directory (eg./usr/local/java/i386/green_threads
+   or /usr/local/java/jre/lib/sparc),
+ OR
+   Set LD_LIBRARY_PATH to include the path where libjpcap.so exists.
+
+Copy jpcap.jar to extension directory (eg./usr/local/java/jre/lib/ext) if
+   you're using JDK1.2 or higher.
+ OR
+   Set CLASSPATH to include jpcap.jar.
+
+
+Compiling on Windows:
+I included the project file of Visual C++, yet I'm not sure
+if it works under different environment. In order to compile,
+you need WinPcap Developer's Pack and the source of WinDump.
+Both are downloadable from http://netgroup-serv.poolito.it./winpcap/
+
+I also included the compiled .DLL file. If you don't want to compile,
+just place jpcap.dll in the same dir with the application that uses
+Jpcap, or copy it to system directory.
+
+
+*Usage
+
+See the documentations under the directory 'doc-??'.
+
+
+*Note
+
+Some Linux distributions, such as RedHat, have their original
+libpcap. Jpcap doesn't work with them. I don't know why...
+In that case, please download libpcap from www.tcpdump.org
+and install it instead of pre-installed one.
+
+You can redistribute it and/or modify it under the terms of
+the GPL (GNU GENERAL PUBLIC LICENSE).  See COPYING file about GPL.
+
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED
+WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  See the GPL for
+more details.
