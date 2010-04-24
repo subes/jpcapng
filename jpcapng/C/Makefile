@@ -42,7 +42,11 @@ ifeq ($(PLATFORM), SunOS)
 else
 ifeq ($(PLATFORM), Darwin)
     JNI_INCLUDE2 = /System/Library/Frameworks/JavaVM.framework/Headers 
-    COMPILE_OPTION = -bundle -framework JavaVM
+    ifeq ($(LBITS),64)
+        COMPILE_OPTION = -arch x86_64 -bundle -framework JavaVM 
+    else
+        COMPILE_OPTION = -bundle -framework JavaVM
+    endif
     SUFFIX = .jnilib
 endif
 endif
