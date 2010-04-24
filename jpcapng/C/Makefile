@@ -1,9 +1,15 @@
 # Makefile for jpcap
 # Copyright (c) 2000 Keita Fujii
+#				2010 Edwin Stang
 
 # You should set JAVA_HOME before running 'make'
 # Or, you can manually change the following line, e.g., 'JAVA_DIR = /usr/java/latest'
-JAVA_DIR = $(JAVA_HOME)
+
+ifdef JAVA_HOME
+	JAVA_DIR = $(JAVA_HOME)
+else
+	JAVA_DIR = "/usr/lib/jvm/default-java/"
+endif
 
 JNI_INCLUDE = $(JAVA_DIR)/include
 
@@ -22,7 +28,7 @@ ifeq ($(PLATFORM), Linux)
 else
 ifeq ($(PLATFORM), FreeBSD)
     JNI_INCLUDE2 = $(JAVA_DIR)/include/freebsd
-     ifeq ($(LBITS),64)
+    ifeq ($(LBITS),64)
         COMPILE_OPTION = -shared -L. -fPIC
     else
         COMPILE_OPTION = -shared -L.
@@ -52,14 +58,14 @@ CC = gcc
 
 all: libjpcap.so
 
-libjpcap.so: JpcapCaptor.c JpcapSender.c JpcapWriter.c\
-             packet_arp.c packet_datalink.c packet_icmp.c packet_ip.c\
-             packet_ipv6.c packet_tcp.c packet_udp.c 
+libjpcap.so: src/JpcapCaptor.c src/JpcapSender.c src/JpcapWriter.c\
+             src/packet_arp.c src/packet_datalink.c src/packet_icmp.c src/packet_ip.c\
+             src/packet_ipv6.c src/packet_tcp.c src/packet_udp.c 
 		$(CC) $(COMPILE_OPTION) -I$(JNI_INCLUDE) -I$(JNI_INCLUDE2)\
 		 -I$(PCAP_INCLUDE)\
-		JpcapCaptor.c JpcapSender.c JpcapWriter.c\
-          packet_arp.c packet_datalink.c packet_icmp.c packet_ip.c\
-          packet_ipv6.c packet_tcp.c packet_udp.c\
-		-o libjpcap$(SUFFIX) -lpcap
+		src/JpcapCaptor.c src/JpcapSender.c src/JpcapWriter.c\
+          src/packet_arp.c src/packet_datalink.c src/packet_icmp.c src/packet_ip.c\
+          src/packet_ipv6.c src/packet_tcp.c src/packet_udp.c\
+		-o bin/libjpcap$(SUFFIX) -lpcap
 clean:
-		-rm libjpcap$(SUFFIX)
+		-rm bin/libjpcap$(SUFFIX)
