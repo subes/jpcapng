@@ -4,6 +4,8 @@ import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents an IP packet.
@@ -107,7 +109,7 @@ public class IPPacket extends Packet {
 	public byte[] option;
 
 	/** Option headers in IPv6Option (v6) */
-	public java.util.List options = null;
+	public List<IPv6Option> options = null;
 
 	/**
 	 * Sets the IPv4 parameters
@@ -152,9 +154,7 @@ public class IPPacket extends Packet {
 		this.d_flag = d_flag;
 		this.t_flag = t_flag;
 		this.r_flag = r_flag;
-		// added by Damien Daspit 5/7/01
 		this.rsv_tos = (byte) rsv_tos;
-		// *****************************
 		this.rsv_frag = rsv_frag;
 		this.dont_frag = dont_frag;
 		this.more_frag = more_frag;
@@ -207,9 +207,7 @@ public class IPPacket extends Packet {
 		d_flag = d;
 		t_flag = t;
 		r_flag = r;
-		// added by Damien Daspit 5/7/01
 		this.rsv_tos = rsv_tos;
-		// *****************************
 		rsv_frag = rf;
 		dont_frag = df;
 		more_frag = mf;
@@ -246,7 +244,7 @@ public class IPPacket extends Packet {
 
 	void addOptionHeader(IPv6Option header) {
 		if (options == null)
-			options = new java.util.ArrayList();
+			options = new ArrayList<IPv6Option>();
 
 		options.add(header);
 	}
