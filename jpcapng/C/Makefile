@@ -69,3 +69,5 @@ libjpcap.so: src/JpcapCaptor.c src/JpcapSender.c src/JpcapWriter.c\
 		-o bin/libjpcap$(SUFFIX) -lpcap
 clean:
 		-rm bin/libjpcap$(SUFFIX)
+		
+$(shell mkdir -p bin)
