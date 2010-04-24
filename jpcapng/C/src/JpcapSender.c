@@ -35,13 +35,6 @@
 #include"jpcap_JpcapSender.h"
 #pragma export reset
 
-#ifdef WIN32
-//LPADAPTER adapters[MAX_NUMBER_OF_INSTANCE];
-SOCKET sockRaw=INVALID_SOCKET;
-#else
-int soc_num=-1;
-#endif
-
 unsigned short in_cksum(unsigned short *addr,int len);
 int set_packet(JNIEnv *env, jobject packet,char *pointer,int include_datalink);
 
@@ -98,56 +91,6 @@ JNIEXPORT jstring JNICALL Java_jpcap_JpcapSender_nativeOpenDevice
 	return NULL;
 }
 
-
-/**
-Open raw socket for sending IP packet
-**/
-JNIEXPORT void JNICALL
-Java_jpcap_JpcapSender_nativeOpenRawSocket(JNIEnv *env,jobject obj){
-  int on=1;
-#ifdef WIN32
-  WSADATA wsaData;
-#endif
-
-  set_Java_env(env);
-
-#ifdef WIN32
-  if(sockRaw!=INVALID_SOCKET){
-#else
-  if(soc_num>=0){
-#endif
-	  Throw(IOException,"Raw Socket is already opened.");
-    return;
-  }
-
-#ifdef WIN32
-  // Start Winsock up
-  if (WSAStartup(MAKEWORD(2, 1), &wsaData) != 0) {
-      Throw(IOException,"Failed to find Winsock 2.1 or better.");
-      return;
-  }
-
-  sockRaw = WSASocket(AF_INET, SOCK_RAW, IPPROTO_RAW, NULL, 0, 0);
-  if (sockRaw == INVALID_SOCKET) {
-//	  printf("%d\n",WSAGetLastError());
-      Throw(IOException,"Failed to create raw socket.");
-      return;
-  }
-  setsockopt(sockRaw,IPPROTO_IP,IP_HDRINCL,(char *)&on,sizeof(on));
-#else
-  if((soc_num=socket(AF_INET,SOCK_RAW,IPPROTO_RAW))<0){
-    Throw(IOException,"can't initialize socket");
-    return;
-  }
-  setsockopt(soc_num,IPPROTO_IP,IP_HDRINCL,(char *)&on,sizeof(on));
-#endif
-
-//#endif
-}
-
-
-
-
 /**
 Send packet via pcap
 **/
@@ -176,50 +119,6 @@ Java_jpcap_JpcapSender_nativeSendPacket(JNIEnv *env,jobject obj,jobject packet){
 #endif
   if(pcap_sendpacket(pcds[id],buf,length)<0){
 		Throw(IOException,pcap_errbuf[id]);
-    return;
-  }
-}
-
-/**
-Send IP Packet via Raw socket
-**/
-JNIEXPORT void JNICALL
-Java_jpcap_JpcapSender_nativeSendPacketViaRawSocket(JNIEnv *env,jobject obj,jobject packet)
-{
-  char buf[MAX_PACKET_SIZE];
-  struct ip *ip=(struct ip *)buf;
-  int length;
-  struct sockaddr_in dest;
-
-  if(!IsInstanceOf(packet,IPPacket)){
-    Throw(IOException,"seinding non-IP packet is not supported");
-    return;
-  }
-#ifdef WIN32
-  if(sockRaw==INVALID_SOCKET){
-    Throw(IOException,"socket not initialized yet");
-    return;
-  }
-#else
-  if(soc_num<0){
-    Throw(IOException,"socket not initialized yet");
-    return;
-  }
-#endif
-  length=set_packet(env,packet,buf,0);
-
-  //set destination address
-  memset((char *)&dest,0,sizeof(dest));
-  dest.sin_family=AF_INET;
-  //bug fix by Peter Martin
-  dest.sin_addr=ip->ip_dst;
-
-#ifdef WIN32
-	if(sendto(sockRaw,buf,length,0,(struct sockaddr *)&dest,sizeof(dest))<0){
-#else
-	if(sendto(soc_num,buf,length,0,(struct sockaddr *)&dest,sizeof(dest))<0){
-#endif
-		Throw(IOException,"sendto error");
     return;
   }
 }
@@ -390,18 +289,4 @@ Java_jpcap_JpcapSender_nativeCloseDevice(JNIEnv *env,jobject obj)
   int id=getJpcapSenderID(env,obj);
   if(pcds[id]!=NULL) pcap_close(pcds[id]);
   pcds[id]=NULL;
-}
-
-JNIEXPORT void JNICALL
-Java_jpcap_JpcapSender_nativeCloseRawSocket(JNIEnv *env,jobject obj)
-{
-#ifdef WIN32
-//  int id=getJpcapSenderID(env,obj);
-//  PacketCloseAdapter(adapters[id]);
-	closesocket(sockRaw);
-  WSACleanup();
-#else
-  //bug fix by Peter Martin
-  close(soc_num);
-#endif
 }

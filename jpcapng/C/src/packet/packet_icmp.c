@@ -13,7 +13,7 @@
 #include<netinet/ip.h>
 #include<netinet/ip_icmp.h>
 
-#include"Jpcap_sub.h"
+#include"../Jpcap_sub.h"
 
 u_short analyze_ip(JNIEnv *env,jobject packet,u_char *data);
 void set_ip(JNIEnv *env,jobject packet,char *pointer);

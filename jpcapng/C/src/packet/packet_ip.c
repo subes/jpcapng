@@ -12,7 +12,7 @@
 #include<netinet/in_systm.h>
 #include<netinet/ip.h>
 
-#include"Jpcap_sub.h"
+#include"../Jpcap_sub.h"
 
 #ifndef IP_RF
 #define IP_RF 0x8000

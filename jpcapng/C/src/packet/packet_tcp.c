@@ -13,7 +13,7 @@
 #include<netinet/ip.h>
 #include<netinet/tcp.h>
 
-#include"Jpcap_sub.h"
+#include"../Jpcap_sub.h"
 
 #define	TH_RSV2	0x40
 #define TH_RSV1 0x80

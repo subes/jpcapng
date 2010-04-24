@@ -59,13 +59,13 @@ CC = gcc
 all: libjpcap.so
 
 libjpcap.so: src/JpcapCaptor.c src/JpcapSender.c src/JpcapWriter.c\
-             src/packet_arp.c src/packet_datalink.c src/packet_icmp.c src/packet_ip.c\
-             src/packet_ipv6.c src/packet_tcp.c src/packet_udp.c 
+             src/packet/packet_arp.c src/packet/packet_datalink.c src/packet/packet_icmp.c src/packet/packet_ip.c\
+             src/packet/packet_ipv6.c src/packet/packet_tcp.c src/packet/packet_udp.c 
 		$(CC) $(COMPILE_OPTION) -I$(JNI_INCLUDE) -I$(JNI_INCLUDE2)\
 		 -I$(PCAP_INCLUDE)\
 		src/JpcapCaptor.c src/JpcapSender.c src/JpcapWriter.c\
-          src/packet_arp.c src/packet_datalink.c src/packet_icmp.c src/packet_ip.c\
-          src/packet_ipv6.c src/packet_tcp.c src/packet_udp.c\
+          src/packet/packet_arp.c src/packet/packet_datalink.c src/packet/packet_icmp.c src/packet/packet_ip.c\
+          src/packet/packet_ipv6.c src/packet/packet_tcp.c src/packet/packet_udp.c\
 		-o bin/libjpcap$(SUFFIX) -lpcap
 clean:
 		-rm bin/libjpcap$(SUFFIX)

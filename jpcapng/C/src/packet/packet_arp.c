@@ -15,7 +15,7 @@
 #include<netinet/in_systm.h>
 #include<netinet/ip.h>
 
-#include"Jpcap_sub.h"
+#include"../Jpcap_sub.h"
 
 /** analyze arp header **/
 int analyze_arp(JNIEnv *env,jobject packet,u_char *data){

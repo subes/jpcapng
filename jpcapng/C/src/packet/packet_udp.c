@@ -14,7 +14,7 @@
 #include<netinet/ip.h>
 #include<netinet/udp.h>
 
-#include"Jpcap_sub.h"
+#include"../Jpcap_sub.h"
 
 /** analyze udp header **/
 void analyze_udp(JNIEnv *env,jobject packet,u_char *data){

@@ -14,8 +14,8 @@
 #include<netinet/in_systm.h>
 #include<netinet/ip.h>
 
-#include"Jpcap_sub.h"
-#include"Jpcap_ether.h"
+#include"../Jpcap_sub.h"
+#include"../Jpcap_ether.h"
 
 /** analyze datalink layer (ethernet) **/
 jobject analyze_datalink(JNIEnv *env,u_char *data,int linktype){

@@ -35,30 +35,6 @@ JNIEXPORT void JNICALL Java_jpcap_JpcapSender_nativeSendPacket
 JNIEXPORT void JNICALL Java_jpcap_JpcapSender_nativeCloseDevice
   (JNIEnv *, jobject);
 
-/*
- * Class:     jpcap_JpcapSender
- * Method:    nativeOpenRawSocket
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_jpcap_JpcapSender_nativeOpenRawSocket
-  (JNIEnv *, jobject);
-
-/*
- * Class:     jpcap_JpcapSender
- * Method:    nativeSendPacketViaRawSocket
- * Signature: (Ljpcap/packet/Packet;)V
- */
-JNIEXPORT void JNICALL Java_jpcap_JpcapSender_nativeSendPacketViaRawSocket
-  (JNIEnv *, jobject, jobject);
-
-/*
- * Class:     jpcap_JpcapSender
- * Method:    nativeCloseRawSocket
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_jpcap_JpcapSender_nativeCloseRawSocket
-  (JNIEnv *, jobject);
-
 #ifdef __cplusplus
 }
 #endif

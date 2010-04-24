@@ -12,7 +12,7 @@
 #include<netinet/in_systm.h>
 #include<netinet/ip.h>
 
-#include"Jpcap_sub.h"
+#include"../Jpcap_sub.h"
 
 #ifdef INET6
 #ifndef WIN32
