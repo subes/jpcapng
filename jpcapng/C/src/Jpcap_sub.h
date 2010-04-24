@@ -14,7 +14,7 @@
 #define TCPHDRLEN 20
 #define UDPHDRLEN 8
 #define ICMPHDRLEN 8
-#define MAX_PACKET_SIZE 1600
+#define MAX_PACKET_SIZE 9000
 
 #ifndef IP_OFFMASK
 #define IP_OFFMASK 0x1fff

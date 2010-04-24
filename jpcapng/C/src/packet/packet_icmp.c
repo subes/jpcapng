@@ -31,8 +31,8 @@ void analyze_icmp(JNIEnv *env,jobject packet,u_char *data,u_short clen){
 
   (*env)->CallVoidMethod(env,packet,setICMPValueMID,
 			     icmp_pkt->icmp_type,icmp_pkt->icmp_code,
-			     icmp_pkt->icmp_cksum);
-  
+			     ntohs(icmp_pkt->icmp_cksum));
+
   if(icmp_pkt->icmp_type==ICMP_ECHOREPLY || /* echo reply */
 	  icmp_pkt->icmp_type==ICMP_ECHO || /* echo */
 	  icmp_pkt->icmp_type>ICMP_PARAMPROB){ /* parameter problem */
@@ -65,7 +65,7 @@ void analyze_icmp(JNIEnv *env,jobject packet,u_char *data,u_short clen){
 						   "Ljpcap/packet/IPPacket;"),
 			    ippacket);
     DeleteLocalRef(ippacket);
-	break; 
+	break;
 #ifdef icmp_num_addrs
   case ICMP_ROUTERADVERT: /* router advertisement */
     {
@@ -76,7 +76,7 @@ void analyze_icmp(JNIEnv *env,jobject packet,u_char *data,u_short clen){
       jintArray prefArray=(*env)->NewIntArray(env,
 					      icmp_pkt->icmp_num_addrs);
       int i;
-      
+
       for(i=0;i<icmp_pkt->icmp_num_addrs;i++){
 	jstring addr_str=NewString((const char *)
 	     inet_ntoa(*(struct in_addr *)(icmp_pkt->icmp_data+8+(i<<3))));
@@ -125,7 +125,7 @@ int set_icmp(JNIEnv *env,jobject packet,char *pointer,jbyteArray data)
 
   icmp->icmp_type=GetByteField(ICMPPacket,packet,"type");
   icmp->icmp_code=GetByteField(ICMPPacket,packet,"code");
-  
+
   switch(icmp->icmp_type){
   case ICMP_ECHOREPLY:
   case ICMP_ECHO:
@@ -154,7 +154,7 @@ int set_icmp(JNIEnv *env,jobject packet,char *pointer,jbyteArray data)
 	icmp->icmp_cksum=0;
 	icmp->icmp_cksum=in_cksum((u_short *)icmp,12+(ippacket==NULL?0:20));
 	return 12+(ippacket==NULL?0:20)-length; //exclude data field
-	break; 
+	break;
   case ICMP_TSTAMP: case ICMP_TSTAMPREPLY: /* timestamp*/
     icmp->icmp_id=htons((jshort)GetShortField(ICMPPacket,packet,"id"));
     icmp->icmp_seq=htons((jshort)GetShortField(ICMPPacket,packet,"seq"));
