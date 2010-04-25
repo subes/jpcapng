@@ -127,11 +127,8 @@ int set_packet(JNIEnv *env, jobject packet,char *pointer,int include_datalink){
   int length=0,dthlen=0;
   jbyteArray data=GetObjectField(Packet,packet,"[B","data");
   length=(*env)->GetArrayLength(env,data);
+  int option_length = 0; //Gets properly set if its an tcppacket
   
-  //Option fix by Michal Spe 9.5.2008
-  jbyteArray option=GetObjectField(TCPPacket,packet,"[B","option");
-  int option_length=(*env)->GetArrayLength(env,option);
-
   if(include_datalink){
 	dthlen=set_ether(env,packet,pointer);
     pointer+=dthlen;
@@ -161,13 +158,13 @@ int set_packet(JNIEnv *env, jobject packet,char *pointer,int include_datalink){
 #endif
 	}
 	if(IsInstanceOf(packet,TCPPacket)){
+	    jbyteArray option=GetObjectField(TCPPacket,packet,"[B","option");
+	    option_length=(*env)->GetArrayLength(env,option);
+
 		length+=TCPHDRLEN;
 		if(ver==4){
 			ip->ip_p=IPPROTO_TCP;
 			ip->ip_len=length;
-			
-			
-
 		    ip->ip_len+=option_length;
 #ifdef INET6
 		}else{
