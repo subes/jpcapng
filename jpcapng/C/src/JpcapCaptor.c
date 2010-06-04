@@ -41,9 +41,6 @@
 #include<netinet/ip6.h>
 //#include<netinet6/ah.h>
 #else
-typedef unsigned char  u_int8_t;
-typedef unsigned short u_int16_t;
-typedef unsigned int   u_int32_t;
 typedef int            pid_t;
 #define IPPROTO_HOPOPTS        0 /* IPv6 Hop-by-Hop options */
 #define IPPROTO_IPV6          41 /* IPv6 header */
@@ -573,14 +570,9 @@ Java_jpcap_JpcapCaptor_setFilter(JNIEnv *env,jobject obj,jstring condition,
 
   if (err != NULL) {
     char buf[2048];
-#ifdef WIN32
-	strcpy_s(buf, 2048,"Error occurred while compiling or setting filter: ");
-    strncat_s(buf, 2048, err, _TRUNCATE);
-#else
-	strcpy(buf, "Error occurred while compiling or setting filter: ");
+    strcpy(buf, "Error occurred while compiling or setting filter: ");
     strncat(buf, err, 2047-strlen(buf));
-#endif
-	buf[2047] = 0;
+    buf[2047] = 0;
     Throw(IOException, buf);
   }
 }

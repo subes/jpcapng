@@ -19,9 +19,6 @@
 #define COMPAT_RFC2292
 #include<sys/socket.h>
 #else
-typedef unsigned char  u_int8_t;
-typedef unsigned short u_int16_t;
-typedef unsigned int   u_int32_t;
 typedef int            pid_t;
 #define IPPROTO_HOPOPTS        0 /* IPv6 Hop-by-Hop options */
 #define IPPROTO_IPV6          41 /* IPv6 header */

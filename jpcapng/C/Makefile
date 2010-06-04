@@ -18,60 +18,74 @@ PLATFORM = $(shell "uname")
 LBITS := $(shell getconf LONG_BIT)
 
 ifeq ($(PLATFORM), Linux)
-    JNI_INCLUDE2 = $(JAVA_DIR)/include/linux
+    PCAP_INCLUDE = /usr/include
+    JNI_INCLUDE2 = $(JNI_INCLUDE)/linux
     ifeq ($(LBITS),64)
         COMPILE_OPTION = -shared -L. -fPIC
     else
         COMPILE_OPTION = -shared -L.
     endif
+    PREFIX = lib
     SUFFIX = .so
+    LD_LIBS = -lpcap
 else
 ifeq ($(PLATFORM), FreeBSD)
+    PCAP_INCLUDE = /usr/include
     JNI_INCLUDE2 = $(JAVA_DIR)/include/freebsd
     ifeq ($(LBITS),64)
         COMPILE_OPTION = -shared -L. -fPIC
     else
         COMPILE_OPTION = -shared -L.
     endif
+    PREFIX = lib
     SUFFIX = .so
+    LD_LIBS = -lpcap
 else
 ifeq ($(PLATFORM), SunOS)
+    PCAP_INCLUDE = /usr/include
     JNI_INCLUDE2 = $(JAVA_DIR)/include/solaris
     COMPILE_OPTION = -G
+    PREFIX = lib
     SUFFIX = .so
+    LD_LIBS = -lpcap
 else
 ifeq ($(PLATFORM), Darwin)
+    PCAP_INCLUDE = /usr/include
     JNI_INCLUDE2 = /System/Library/Frameworks/JavaVM.framework/Headers 
     ifeq ($(LBITS),64)
         COMPILE_OPTION = -arch x86_64 -bundle -framework JavaVM 
     else
         COMPILE_OPTION = -bundle -framework JavaVM
     endif
+    PREFIX = lib
     SUFFIX = .jnilib
+    LD_LIBS = -lpcap
+else
+    #windows
+    PCAP_INCLUDE = ./win32/include
+    JNI_INCLUDE2 = $(JNI_INCLUDE)/win32
+    COMPILE_OPTION = -shared -L.
+    WIN32_LIB_DIRS = -L./win32/lib "-L$(LIB)"
+    SUFFIX = .dll
+    LD_LIBS = -lwpcap -lpacket -lWs2_32 -liphlpapi
 endif
 endif
 endif
 endif
-
-# Specify where pcap.h is
-PCAP_INCLUDE = /usr/include
-#PCAP_INCLUDE = /usr/include/pcap
 
 #CC = cl
 CC = gcc
 
-all: libjpcap.so
-
-libjpcap.so: src/JpcapCaptor.c src/JpcapSender.c src/JpcapWriter.c\
+all: src/JpcapCaptor.c src/JpcapSender.c src/JpcapWriter.c\
              src/packet/packet_arp.c src/packet/packet_datalink.c src/packet/packet_icmp.c src/packet/packet_ip.c\
              src/packet/packet_ipv6.c src/packet/packet_tcp.c src/packet/packet_udp.c 
 		$(CC) $(COMPILE_OPTION) -I$(JNI_INCLUDE) -I$(JNI_INCLUDE2)\
-		 -I$(PCAP_INCLUDE)\
+		 -I$(PCAP_INCLUDE) $(WIN32_LIB_DIRS)\
 		src/JpcapCaptor.c src/JpcapSender.c src/JpcapWriter.c\
           src/packet/packet_arp.c src/packet/packet_datalink.c src/packet/packet_icmp.c src/packet/packet_ip.c\
           src/packet/packet_ipv6.c src/packet/packet_tcp.c src/packet/packet_udp.c\
-		-o bin/libjpcap$(SUFFIX) -lpcap
+		-o bin/$(PREFIX)jpcap$(SUFFIX) $(LD_LIBS)
 clean:
-		-rm bin/libjpcap$(SUFFIX)
+		-rm bin/$(PREFIX)jpcap$(SUFFIX)
 		
-$(shell mkdir -p bin)
+$(shell mkdir bin)
