@@ -162,6 +162,7 @@ Get Interface List
 JNIEXPORT jobjectArray JNICALL Java_jpcap_JpcapCaptor_getDeviceList
   (JNIEnv *env, jclass cl)
 {
+    printf("0\n");
 	pcap_if_t *alldevs;
 	pcap_if_t *d;
 	pcap_addr_t *a;
@@ -175,7 +176,7 @@ JNIEXPORT jobjectArray JNICALL Java_jpcap_JpcapCaptor_getDeviceList
 	int linktype;
 	jstring lname,ldesc;
 #ifdef WIN32
-    u_long size=0;
+    ULONG size=0;
 	PIP_INTERFACE_INFO pInfo = NULL;
 	MIB_IFROW MibIfRow;
 	char **devnames;
@@ -193,6 +194,8 @@ JNIEXPORT jobjectArray JNICALL Java_jpcap_JpcapCaptor_getDeviceList
 #endif
 #endif
 
+    printf("1\n");
+
 	Interface=FindClass("jpcap/NetworkInterface");
 	deviceConstMID=(*env)->GetMethodID(env,Interface,"<init>","(Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;[B[Ljpcap/NetworkInterfaceAddress;)V");
 	IAddress=FindClass("jpcap/NetworkInterfaceAddress");
@@ -207,23 +210,29 @@ JNIEXPORT jobjectArray JNICALL Java_jpcap_JpcapCaptor_getDeviceList
         return NULL;
     }
 
+    printf("2\n");
+
 	//count # of devices
 	for(i=0,d=alldevs;d;d=d->next,i++);
-
+	printf("2,1\n");
 	//create array
 	devices=(*env)->NewObjectArray(env,(jsize)i,Interface,NULL);
-
+	printf("2,2\n");
 #ifdef WIN32
 	//obtain necessary size
-	GetInterfaceInfo(NULL, &size);
+	GetInterfaceInfo(pInfo, &size);
+	printf("2,3\n");
 	//allocate memory
 	pInfo = (PIP_INTERFACE_INFO) malloc (size);
+	printf("2,4\n");
 	if(GetInterfaceInfo(pInfo, &size)!=NO_ERROR){
 		Throw(IOException,"GetInterfaceInfo failed.");
 		return NULL;
 	}
+	printf("2,5\n");
 #endif
 
+	printf("3\n");
 	/* Set Interface data */
     for(i=0,d=alldevs;d;d=d->next)
     {
@@ -292,7 +301,7 @@ JNIEXPORT jobjectArray JNICALL Java_jpcap_JpcapCaptor_getDeviceList
     }
 #endif
 #endif
-
+    printf("4\n");
 		//count # of addresses
 		for(j=0,a=d->addresses;a;a=a->next)
 			if(getAddressByteArray(env,a->addr)) j++;
@@ -337,13 +346,14 @@ JNIEXPORT jobjectArray JNICALL Java_jpcap_JpcapCaptor_getDeviceList
 
 	(*env)->ExceptionDescribe(env);
 
+	printf("5\n");
 #ifndef WIN32
 #ifdef SIOCGIFHWADDR
 #else
     freeifaddrs(ifa0);
 #endif
 #endif
-
+    printf("6\n");
 	return devices;
 }
 
