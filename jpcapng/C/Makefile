@@ -62,10 +62,10 @@ ifeq ($(PLATFORM), Darwin)
     LD_LIBS = -lpcap
 else
     #windows x86
-    PCAP_INCLUDE = ./win32/WpdPack/Include
+    PCAP_INCLUDE = win32/WpdPack/Include
     JNI_INCLUDE2 = $(JNI_INCLUDE)/win32
     COMPILE_OPTION = -D_JNI_IMPLEMENTATION_ -Wl,--kill-at -shared
-    WIN32_ARGS = -I./win32/Include -L./win32/WpdPack/Lib "-L$(WSDK_HOME)/Lib"
+    WIN32_ARGS = -Iwin32/Include -Lwin32/WpdPack/Lib
     SUFFIX = .dll
     LD_LIBS = -lwpcap -lPacket -lWsock32 -liphlpapi
 endif

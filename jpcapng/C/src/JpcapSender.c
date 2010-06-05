@@ -31,9 +31,7 @@
 //#include<netinet6/ah.h>
 #endif
 
-#pragma export on
 #include"jpcap_JpcapSender.h"
-#pragma export reset
 
 unsigned short in_cksum(unsigned short *addr,int len);
 int set_packet(JNIEnv *env, jobject packet,char *pointer,int include_datalink);

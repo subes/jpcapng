@@ -8,9 +8,7 @@
 #include<netinet/in_systm.h>
 #include<netinet/ip.h>
 
-#pragma export on
 #include"jpcap_JpcapWriter.h"
-#pragma export reset
 
 #include"Jpcap_sub.h"
 
