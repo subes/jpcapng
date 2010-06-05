@@ -64,7 +64,7 @@ else
     #windows
     PCAP_INCLUDE = ./win32/include
     JNI_INCLUDE2 = $(JNI_INCLUDE)/win32
-    COMPILE_OPTION = -shared -L.
+    COMPILE_OPTION = -D_JNI_IMPLEMENTATION_ -Wl,--kill-at -shared -L.
     WIN32_LIB_DIRS = -L./win32/lib "-L$(LIB)"
     SUFFIX = .dll
     LD_LIBS = -lwpcap -lpacket -lWs2_32 -liphlpapi
@@ -79,7 +79,7 @@ CC = gcc
 all: src/JpcapCaptor.c src/JpcapSender.c src/JpcapWriter.c\
              src/packet/packet_arp.c src/packet/packet_datalink.c src/packet/packet_icmp.c src/packet/packet_ip.c\
              src/packet/packet_ipv6.c src/packet/packet_tcp.c src/packet/packet_udp.c 
-		$(CC) $(COMPILE_OPTION) -I"$(JNI_INCLUDE)" -I"$(JNI_INCLUDE2)"\
+		$(CC) -Wall $(COMPILE_OPTION) -I"$(JNI_INCLUDE)" -I"$(JNI_INCLUDE2)"\
 		 -I"$(PCAP_INCLUDE)" $(WIN32_LIB_DIRS)\
 		src/JpcapCaptor.c src/JpcapSender.c src/JpcapWriter.c\
           src/packet/packet_arp.c src/packet/packet_datalink.c src/packet/packet_icmp.c src/packet/packet_ip.c\
