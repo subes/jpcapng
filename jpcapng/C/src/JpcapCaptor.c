@@ -112,7 +112,6 @@ jobject jpcap_handlers[MAX_NUMBER_OF_INSTANCE];
 char pcap_errbuf[PCAP_ERRBUF_SIZE][MAX_NUMBER_OF_INSTANCE];
 
 void set_info(JNIEnv *env,jobject obj,pcap_t *pcd);
-void set_Java_env(JNIEnv *);
 void get_packet(struct pcap_pkthdr,u_char *,jobject *,int);
 void dispatcher_handler(u_char *,const struct pcap_pkthdr *,const u_char *);
 

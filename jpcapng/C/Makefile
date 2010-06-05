@@ -21,9 +21,9 @@ ifeq ($(PLATFORM), Linux)
     PCAP_INCLUDE = /usr/include
     JNI_INCLUDE2 = $(JNI_INCLUDE)/linux
     ifeq ($(LBITS),64)
-        COMPILE_OPTION = -shared -L. -fPIC
+        COMPILE_OPTION = -shared -fPIC
     else
-        COMPILE_OPTION = -shared -L.
+        COMPILE_OPTION = -shared
     endif
     PREFIX = lib
     SUFFIX = .so
@@ -33,9 +33,9 @@ ifeq ($(PLATFORM), FreeBSD)
     PCAP_INCLUDE = /usr/include
     JNI_INCLUDE2 = $(JAVA_DIR)/include/freebsd
     ifeq ($(LBITS),64)
-        COMPILE_OPTION = -shared -L. -fPIC
+        COMPILE_OPTION = -shared -fPIC
     else
-        COMPILE_OPTION = -shared -L.
+        COMPILE_OPTION = -shared
     endif
     PREFIX = lib
     SUFFIX = .so
@@ -61,13 +61,13 @@ ifeq ($(PLATFORM), Darwin)
     SUFFIX = .jnilib
     LD_LIBS = -lpcap
 else
-    #windows
-    PCAP_INCLUDE = ./win32/include
+    #windows x86
+    PCAP_INCLUDE = ./win32/WpdPack/Include
     JNI_INCLUDE2 = $(JNI_INCLUDE)/win32
-    COMPILE_OPTION = -D_JNI_IMPLEMENTATION_ -Wl,--kill-at -shared -L.
-    WIN32_LIB_DIRS = -L./win32/lib "-L$(LIB)"
+    COMPILE_OPTION = -D_JNI_IMPLEMENTATION_ -Wl,--kill-at -shared
+    WIN32_ARGS = -I./win32/Include -L./win32/WpdPack/Lib "-L$(WSDK_HOME)/Lib"
     SUFFIX = .dll
-    LD_LIBS = -lwpcap -lpacket -lWs2_32 -liphlpapi
+    LD_LIBS = -lwpcap -lPacket -lWsock32 -liphlpapi
 endif
 endif
 endif
@@ -80,7 +80,7 @@ all: src/JpcapCaptor.c src/JpcapSender.c src/JpcapWriter.c\
              src/packet/packet_arp.c src/packet/packet_datalink.c src/packet/packet_icmp.c src/packet/packet_ip.c\
              src/packet/packet_ipv6.c src/packet/packet_tcp.c src/packet/packet_udp.c 
 		$(CC) -Wall $(COMPILE_OPTION) -I"$(JNI_INCLUDE)" -I"$(JNI_INCLUDE2)"\
-		 -I"$(PCAP_INCLUDE)" $(WIN32_LIB_DIRS)\
+		 -I"$(PCAP_INCLUDE)" $(WIN32_ARGS)\
 		src/JpcapCaptor.c src/JpcapSender.c src/JpcapWriter.c\
           src/packet/packet_arp.c src/packet/packet_datalink.c src/packet/packet_icmp.c src/packet/packet_ip.c\
           src/packet/packet_ipv6.c src/packet/packet_tcp.c src/packet/packet_udp.c\
