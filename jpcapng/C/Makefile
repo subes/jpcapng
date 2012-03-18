@@ -8,7 +8,7 @@
 ifdef JAVA_HOME
 	JAVA_DIR = $(JAVA_HOME)
 else
-	JAVA_DIR = "/usr/lib/jvm/default-java/"
+	JAVA_DIR = /usr/lib/jvm/default-java/
 endif
 
 JNI_INCLUDE = $(JAVA_DIR)/include
