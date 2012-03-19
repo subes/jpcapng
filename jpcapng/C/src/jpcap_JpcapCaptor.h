@@ -7,8 +7,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#undef jpcap_JpcapCaptor_MAX_NUMBER_OF_INSTANCE
-#define jpcap_JpcapCaptor_MAX_NUMBER_OF_INSTANCE 255L
+#undef jpcap_JpcapCaptor_MAX_NUMBER_OF_INSTANCES
+#define jpcap_JpcapCaptor_MAX_NUMBER_OF_INSTANCES 255L
 /*
  * Class:     jpcap_JpcapCaptor
  * Method:    nativeOpenLive

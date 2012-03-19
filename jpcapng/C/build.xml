@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<project name="jpcapng-C" default="make">
+
+	<target name="clean">	
+		<delete dir="bin" includeemptydirs="true" />
+		<delete dir="lib" includeemptydirs="true" />
+	</target>
+
+	<target name="javah" depends="clean">
+		<ant antfile="../Java/build.xml" target="compile"/>
+		<javah destdir="src" classpath="../Java/bin" force="true">
+			<class name="jpcap.JpcapCaptor"/>
+			<class name="jpcap.JpcapSender"/>
+			<class name="jpcap.JpcapWriter"/>
+		</javah>
+	</target>
+	
+	<target name="make" depends="javah">
+		<exec executable="make">
+		</exec>
+		<copy file="bin/libjpcap.so" todir="lib" overwrite="true"/>
+	</target>
+	
+</project>

@@ -7,10 +7,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#undef jpcap_JpcapSender_MAX_NUMBER_OF_INSTANCE
-#define jpcap_JpcapSender_MAX_NUMBER_OF_INSTANCE 255L
-#undef jpcap_JpcapSender_RAW_SOCKET_ID
-#define jpcap_JpcapSender_RAW_SOCKET_ID 99999L
+#undef jpcap_JpcapSender_MAX_NUMBER_OF_INSTANCES
+#define jpcap_JpcapSender_MAX_NUMBER_OF_INSTANCES 255L
 /*
  * Class:     jpcap_JpcapSender
  * Method:    nativeOpenDevice

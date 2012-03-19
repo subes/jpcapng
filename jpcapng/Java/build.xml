@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<project name="jpcapng-java" default="jar">
+
+	<target name="clean">
+		<delete dir="lib" includeemptydirs="true" />
+	</target>
+
+	<target name="compile" depends="clean">
+	    	<mkdir dir="bin"/>
+        	<javac
+        		srcdir="src"
+      			destdir="bin"
+       		/>
+    	</target>
+	
+    	<target name="jar" depends="compile">
+        	<jar jarfile="lib/jpcapng.jar" basedir="bin"/>
+    	</target>
+
+	<target name="javadoc">
+		<javadoc
+			packagenames="*"
+			sourcepath="src"
+			destdir="doc/javadoc"
+			locale="en_US"
+			Public="true"
+		/>
+	</target>
+	
+</project>
