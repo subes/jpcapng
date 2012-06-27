@@ -16,9 +16,9 @@
 	</target>
 	
 	<target name="make" depends="javah">
-		<exec executable="make">
-		</exec>
-		<copy file="bin/libjpcap.so" todir="lib" overwrite="true"/>
+		<exec executable="make" />
+		<copy file="bin/libjpcap.so" todir="lib" overwrite="true" failonerror="false"/>
+		<copy file="bin/jpcap.dll" todir="lib" overwrite="true" failonerror="false"/>
 	</target>
 	
 </project>
