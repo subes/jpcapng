@@ -12,3 +12,5 @@ How to compile on Windows:
 - see your jpcapng.jar in lib dir
 - cd to <SVN_CHECKOUT_DIR>\trunk\jpcapng\C and run "ant" (this creates the jni-includes from the java classes and creates the dll)
 - see your jpcapng.dll in lib dir
+
+Mirror of: https://sourceforge.net/projects/jpcapng/
